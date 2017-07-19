@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -40,7 +41,10 @@ public class MainFrame extends Application {
 
         tabPane = new TabPane();
 
+
+
         root.setCenter(tabPane);
+        root.setLeft(new Rectangle(100, 500));
 
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);

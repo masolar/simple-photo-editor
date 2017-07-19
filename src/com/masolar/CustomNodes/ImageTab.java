@@ -1,5 +1,6 @@
 package com.masolar.CustomNodes;
 
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,14 +20,19 @@ public class ImageTab extends Tab {
         // Will hold the picture in the center area
         BorderPane pane = new BorderPane();
 
+        // Used for scrolling the image
+        ScrollPane scroll = new ScrollPane();
+        scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+
         // Will display the working image
         ImageView imageView = new ImageView();
         imageView.setPreserveRatio(true);
         imageView.setImage(image);
 
-        pane.setCenter(imageView);
+        scroll.setContent(imageView);
+        pane.setCenter(scroll);
 
-        // Displays the iamge preview in a tab
+        // Displays the image preview in a tab
         // TODO: Fix tab height to see the image.
         ImageView imagePreview = new ImageView();
         imagePreview.setPreserveRatio(true);
