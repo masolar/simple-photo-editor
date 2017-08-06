@@ -4,50 +4,34 @@ package com.masolar;
  * Created by Mason on 6/11/2017.
  */
 
-import com.masolar.CustomNodes.ZoomableImageView;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.util.List;
+public class App extends Application {
 
-public class MainFrame extends Application {
-
-    static TabPane tabPane;// = new TabPane();
+    // Allows the use of the stage outside this class
+    public static Stage stage;
 
     public static void main(String[] args) {
         launch(args);
     }
 
     /*
-    Represents the starting point of the program. Sets up the stage and the menus.
+    Exists to set up the stage for this program.
      */
     @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Photo Editor");
+    public void start(Stage primaryStage) throws Exception {
+        stage = primaryStage;
 
-        BorderPane root = new BorderPane();
-
-        MenuBar menuBar = setupMenus(primaryStage);
-        root.setTop(menuBar);
+        Parent root = FXMLLoader.load(getClass().getResource("MainFrame.fxml"));
 
         Scene scene = new Scene(root);
 
-        tabPane = new TabPane();
-
-
-
-        root.setCenter(tabPane);
-        root.setLeft(new Rectangle(100, 500));
-
         primaryStage.setScene(scene);
+        primaryStage.setTitle("Photo Editor");
         primaryStage.setMaximized(true);
         primaryStage.show();
     }
@@ -55,7 +39,7 @@ public class MainFrame extends Application {
     /*
     Sets up all of the menus, menu items, and menu item actions.
      */
-    private MenuBar setupMenus(Stage primaryStage) {
+    /*private MenuBar setupMenus(Stage primaryStage) {
         MenuBar menuBar = new MenuBar();
 
         // Start of the file menu
@@ -70,7 +54,7 @@ public class MainFrame extends Application {
                 if (selectedFile != null) {
                     Image displayImage = new Image("file:" + selectedFile.getAbsolutePath());
 
-                    tabPane.getTabs().add(generateImageTab(displayImage));
+                    tabPane.getTabs().add(createImageTab(displayImage));
                 }
         });
 
@@ -84,11 +68,11 @@ public class MainFrame extends Application {
         return menuBar;
     }
 
-    public Tab generateImageTab(Image image) {
+    public Tab createImageTab(Image image) {
         Tab tab = new Tab();
 
         // Will hold the picture in the center area
-        BorderPane pane = new BorderPane();
+        StackPane pane = new StackPane();
 
         // Used for scrolling the image
         ScrollPane scroll = new ScrollPane();
@@ -97,7 +81,7 @@ public class MainFrame extends Application {
         ZoomableImageView zoomableImageView = new ZoomableImageView(image);
 
         scroll.setContent(zoomableImageView);
-        pane.setCenter(scroll);
+        pane.getChildren().add(scroll);
 
 
         ImageView imagePreview = new ImageView();
@@ -110,5 +94,5 @@ public class MainFrame extends Application {
         tab.setContent(pane);
 
         return tab;
-    }
+    }*/
 }

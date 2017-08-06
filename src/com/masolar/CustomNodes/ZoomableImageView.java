@@ -22,7 +22,7 @@ public class ZoomableImageView extends ImageView {
 
         addEventFilter(ScrollEvent.SCROLL, event -> {
             if (event.isControlDown()) {
-                if (event.getDeltaY() < 0) {
+                if (event.getDeltaY() < 0 && zoomProperty.get() > .07) {
                     zoomProperty.set(zoomProperty.get() - .07);
                 } else if (event.getDeltaY() > 0) {
                     zoomProperty.set(zoomProperty.get() + .07);
@@ -31,6 +31,9 @@ public class ZoomableImageView extends ImageView {
         });
 
         setPreserveRatio(true);
+        setLayoutX(100);
+        setLayoutY(100);
         setImage(image);
+
     }
 }
